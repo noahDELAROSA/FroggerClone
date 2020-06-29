@@ -13,20 +13,25 @@ class Enemy(Sprite):
         self.image = pygame.image.load('assets/enemy_ship.png')
         # enemy rect
         self.rect = self.image.get_rect()
-      
-        
+        self.screen_rect = self.screen.get_rect()
+
+        self.enemy_direction = 1
+        # add enemy speed here so that it is stored with individual enemies 
+        self.speed = 1
 
         self.x = float(self.rect.x)
 
     def check_edges(self):
         """ make sure player is in the screen bounds """
         screen_rect = self.screen.get_rect()
-        if self.rect.right >= 400 or self.rect.left <= 0:
-            return True
+        # make it so that the enemy direction is being set and not multiplied on 
+        if self.rect.right >= self.screen_rect.right:
+            self.enemy_direction = -1
+        elif self.rect.left <= 0:
+            self.enemy_direction = 1
             
 
-    def update(self, direction):
+    def update(self):
         """ update the enemy position """
-        print(self.x)
-        self.x += (self.settings.enemy_speed * direction)
+        self.x += (self.speed * self.enemy_direction)
         self.rect.x = self.x
