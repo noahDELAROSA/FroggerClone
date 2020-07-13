@@ -16,7 +16,7 @@ class Settings:
 
         self.screen_rows = self.screen_height / 12
 
-        self.enemy_speed = 0.5 #random.randint(1, 3)
+        self.enemy_speed = 1
         self.enemy_direction = 1 #random.choices(self.direction_list)
 
 

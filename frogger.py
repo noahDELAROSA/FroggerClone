@@ -35,8 +35,6 @@ class Frogger:
 
         self._create_enemys()
 
-       
-
 
 
     def run_game(self):
@@ -47,7 +45,6 @@ class Frogger:
             self._update_enemy()
             # update the screen
             self._update_screen()
-            
 
 
 
@@ -93,9 +90,10 @@ class Frogger:
     def _create_enemy(self, row_number):
         """ creats enemy sprite and location """
         enemy = Enemy(self)
-
+        # added the random speed calulation at the creation of the individual enemy 
+        # duh why the F did i not think of that 
+        enemy.speed = random.randint(2, 5)
         enemy.y = row_number * 100
-
         # speed
         enemy.x = self.settings.enemy_direction * self.settings.enemy_speed + random.randint(20, 200)
         enemy.rect.x = enemy.x
@@ -104,18 +102,13 @@ class Frogger:
 
     def _update_enemy(self):
         """ enemy update """
-        self.enemys.update(self.settings.enemy_direction)
+        self.enemys.update()
         self._check_enemy_edges()
-
-    def _change_enemy_direction(self):
-
-        self.settings.enemy_direction *= -1
 
     def _check_enemy_edges(self):
         for enemy in self.enemys.sprites():
             if enemy.check_edges():
                   self._change_enemy_direction()
-                  break
 
     def _update_screen(self):
         """ things to be update """
